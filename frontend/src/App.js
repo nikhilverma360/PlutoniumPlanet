@@ -134,13 +134,13 @@ function App() {
     return (<div >
       <Router>
         <Routes>
-          <Route path="/" caseSensitive={false} element={<Dashboard />} />
-          <Route path="/dashboard" caseSensitive={false} element={<Dashboard />} />
-          <Route path="/MysteryBox" caseSensitive={false} element={<MysteryBox />} />
-          <Route path="/StartGame" caseSensitive={false} element={<StartGame />} />
-          <Route path="/Collections" caseSensitive={false} element={<NFTcollections />} />
-          <Route path="/Marketplace" caseSensitive={false} element={<Marketplace />} />
-          <Route path="/Farms" caseSensitive={false} element={<Farms />} />
+          <Route path="/" caseSensitive={false} element={<Dashboard address={currentAccount} />} />
+          <Route path="/dashboard" caseSensitive={false} element={<Dashboard address={currentAccount} />} />
+          <Route path="/MysteryBox" caseSensitive={false} element={<MysteryBox address={currentAccount} />} />
+          <Route path="/StartGame" caseSensitive={false} element={<StartGame address={currentAccount} />} />
+          <Route path="/Collections" caseSensitive={false} element={<NFTcollections address={currentAccount} />} />
+          <Route path="/Marketplace" caseSensitive={false} element={<Marketplace address={currentAccount} />} />
+          <Route path="/Farms" caseSensitive={false} element={<Farms address={currentAccount} />} />
 
         </Routes>
       </Router>
