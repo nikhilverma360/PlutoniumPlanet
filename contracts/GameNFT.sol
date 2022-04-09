@@ -91,6 +91,54 @@ contract GameNFT is ERC721Enumerable, VRFConsumerBase, Ownable {
         return requestId;
     }
 
+    //refer & earn .
+    function orderReferalBox(address _referid)
+        public
+        payable
+        returns (bytes32)
+    {
+        require(
+            LINK.balanceOf(address(this)) >= fee,
+            "Not enough LINK - fill contract with faucet"
+        );
+        uint256 supply = totalSupply();
+        require(!referalPaused);
+        require(supply + 1 <= maxSupply);
+        require(balanceOf(_referid) > 0);
+
+        uint256 OfferPrice = cost - ((cost * 1) / 10);
+
+        if (msg.sender != owner()) {
+            if (whitelisted[msg.sender] != true) {
+                if (presaleWallets[msg.sender] != true) {
+                    //general public
+                    require(
+                        gameToken.transferFrom(
+                            msg.sender,
+                            address(this),
+                            OfferPrice
+                        ),
+                        "Pay Up"
+                    );
+                    gameToken.transfer(_referid, (cost * 1) / 10);
+                } else {
+                    //presale
+                    require(
+                        gameToken.transferFrom(
+                            msg.sender,
+                            address(this),
+                            presaleCost
+                        ),
+                        "Pay Up"
+                    );
+                }
+            }
+        }
+        bytes32 requestId = requestRandomness(keyHash, fee);
+        requestToSender[requestId] = msg.sender;
+        return requestId;
+    }
+
     function fulfillRandomness(bytes32 requestId, uint256 randomness)
         internal
         override
@@ -172,6 +220,10 @@ contract GameNFT is ERC721Enumerable, VRFConsumerBase, Ownable {
 
     function pause(bool _state) public onlyOwner {
         paused = _state;
+    }
+
+    function referalPause(bool _state) public onlyOwner {
+        referalPaused = _state;
     }
 
     function whitelistUser(address _user) public onlyOwner {
