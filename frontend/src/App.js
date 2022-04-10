@@ -117,7 +117,7 @@ function App() {
         </button>
         {/* Skill Wallet */}
         <div>
-          <sw-auth partner-key="c3842343a29eac1d33a53bt60gfs1aqcg6g5g71d"></sw-auth>
+          <sw-auth partner-key="973901eb5b092294765499e95284324fe840b001"></sw-auth>
         </div>
       </div>
     </center>
