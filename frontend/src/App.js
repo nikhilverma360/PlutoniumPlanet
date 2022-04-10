@@ -117,7 +117,7 @@ function App() {
         </button>
         {/* Skill Wallet */}
         <div>
-          <sw-auth partner-key="973901eb5b092294765499e95284324fe840b001"></sw-auth>
+          <sw-auth partner-key="973901eb5b092294765499e95284324fe840b001" use-dev="true"></sw-auth>
         </div>
       </div>
     </center>
@@ -156,12 +156,10 @@ function App() {
 
   useEffect(() => {
     checkIfWalletIsConnected();
-  }, []);
-
-  // Skill Wallet
-  useEffect(() => {
     InitSwAuth();
   }, []);
+
+
 
 
   return (
