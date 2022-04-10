@@ -10,6 +10,9 @@ import { networks } from './utils/networks';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import bgImage from './assets/bg-page-content.svg';
 
+// Skill Wallet
+import { InitSwAuth } from '@skill-wallet/auth';
+
 function App() {
   const [currentAccount, setCurrentAccount] = useState('');
   const [network, setNetwork] = useState('');
@@ -112,6 +115,10 @@ function App() {
         <button onClick={connectWallet} className="rounded-lg bg-yellow-400 hover:opacity-75 p-8">
           Connect Wallet
         </button>
+        {/* Skill Wallet */}
+        <div>
+          <sw-auth partner-key="c3842343a29eac1d33a53bt60gfs1aqcg6g5g71d"></sw-auth>
+        </div>
       </div>
     </center>
   </>
@@ -150,6 +157,12 @@ function App() {
   useEffect(() => {
     checkIfWalletIsConnected();
   }, []);
+
+  // Skill Wallet
+  useEffect(() => {
+    InitSwAuth();
+  }, []);
+
 
   return (
     < div className="w-full h-screen font-Righteous font-bold bg-scroll" style={{
